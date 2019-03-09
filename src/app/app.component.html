@@ -1,21 +1,114 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}! test
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
+
+<h1>ngif with then and else condition</h1>
+
+<input type="radio" name="radio1" (click)="changeValue(true)" />True
+<input type="radio" name="radio1" (click)="changeValue(false)" />False
+
+<p *ngIf="isvalid ; then validDiv ; else elseDiv"></p>
+    <ng-template #validDiv>
+        This is valid
+    </ng-template>
+    <ng-template #elseDiv>
+        This is not valid
+      </ng-template>
+       
+
+<select (click)="changeOption($event)">
+  <option value="choose">choose</option>
+  <option value="one">One</option>
+  <option value="two">Two</option>
+  <option value="three">Three</option>
+</select>
+
+<div [ngSwitch]="choose">
+  <h3 *ngSwitchCase="'one'">One</h3>
+  <h3 *ngSwitchCase="'two'">two</h3>
+  <h3 *ngSwitchCase="'three'">Three</h3>
 </div>
-<h2>Here are some links to help you start: </h2>
+
+<h1>NGfor</h1>
+
 <ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/cli">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
+  <li *ngFor="let student of students ; let i=index">
+   {{i}} {{student.name}}
   </li>
 </ul>
 
+<h1>Group ngfor</h1>
+
+<ul *ngFor="let group of studentGroup">
+  <li>{{group.country}}
+
+    <ul>
+      <li *ngFor="let person of group.people">
+        {{person.name}}
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h1>Two Way Data Binding</h1>
+Name <input type="text" [value]="data" (input)="data=$event.target.value" >
+<br />
+Name is : {{data}} <br />
+Name : <input [(ngModel)]="data1" ><br />
+Name is : {{data1}}
+
+<h1>Pipe</h1>
+<table border="1">
+  <tr>
+    <th>EmpId</th>
+    <th>Name</th>
+    <th>Designation</th>
+  </tr>
+  <tr *ngFor="let empdetail of pipesArray">
+    <td>{{empdetail.empid}}</td>
+    <td>{{empdetail.name | uppercase}}</td>
+    <td>{{empdetail.des}}</td>
+  </tr>
+</table>
+
+<h1>Parameterized pipe</h1>
+<p>{{pipeDate}}</p>
+<p>{{pipeDate | date : medium | lowercase}}</p>
+<p>{{pipeDate | date : "dd/M/yyyy"}}</p>
+<p>{{pipeDate | date : "mediumTime"}}</p>
+<p>Fulldate {{ pipeDate | date: "fullDate" }}</p>
+<p>{{pipeCurrency | currency : "INR" : true}}</p>
+
+<h1>Custom pipe by create external pipe ts file</h1>
+<table border="1">
+  <tr>
+    <th>Name</th>
+    <th>Salary</th>
+  </tr>
+  <tr *ngFor="let empdetail of pipeEmployee">
+    <td>{{empdetail.name | mypipe : empdetail.gender}}</td>
+    <td>{{empdetail.salary | currency : "INR" : true}}</td>
+  </tr>
+</table>
+
+<h1>Router link</h1>
+<a [routerLink] = "['/student']">Student</a>---- 
+
+<a [routerLink] = "['/studentdsdfetails']">Pagenotfound </a><br />
+<button (click)="student()">show student</button>
 <router-outlet></router-outlet>
+<h1>Services</h1>
+<p>{{text}}</p>
+<h1>Dependcy injuection</h1>
+<table border="1">
+  <tr>
+    <th>empId</th>
+    <th>name</th>
+  </tr>
+  <tr *ngFor="let empdetail of employees">
+    <td>{{empdetail.empid}}</td>
+    <td>{{empdetail.name}}</td>
+  </tr>
+</table>
+
+<h1>Install Bootstrap</h1>
+<button class="btn btn-success">Test Bootstrap</button>
+<br /><br /><br /><br /><br />
+
