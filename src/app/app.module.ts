@@ -4,8 +4,6 @@ import {FormsModule} from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { DragDropModule } from '@angular/cdk/drag-drop';
-import { from } from 'rxjs';
 import { MypipePipe } from './mypipe.pipe';
 import { StudentdetailsComponent } from './studentdetails/studentdetails.component';
 import { StudentsComponent } from './students/students.component';
@@ -21,7 +19,6 @@ import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
   ],
   imports: [
     BrowserModule,
-    DragDropModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     FormsModule 
