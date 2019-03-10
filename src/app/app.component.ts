@@ -1,25 +1,39 @@
 import { Component } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
-
+import { FormArray, FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html'
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  userForm: any;
-  
-  constructor(private formBuilder: FormBuilder) {
-      
-    this.userForm = this.formBuilder.group({
-      'name': ['', Validators.required],
-      'email': ['', [Validators.required, ValidationService.emailValidator]],
-      'profile': ['', [Validators.required, Validators.minLength(10)]]
+  title = 'ang7app';
+
+  FormGroup : FormGroup;
+  listCount : number;
+  constructor(private fb : FormBuilder){}
+
+  ngOnInit(){
+    this.FormGroup = this.fb.group({
+      itemRows : this.fb.array([this.initItemRow()])
+    });
+    console.log(this.FormGroup);
+  }
+  initItemRow(){
+    return this.fb.group({
+      Name : [''],
+      Email : ['']
     });
   }
+  addNewRow(){
+    const control = <FormArray>this.FormGroup.controls['itemRows'];
+    console.log(control.push(this.initItemRow()));
+    console.log('---');
+  }
+
   
-  saveUser() {
-    if (this.userForm.dirty && this.userForm.valid) {
-      alert(`Name: ${this.userForm.value.name} Email: ${this.userForm.value.email}`);
-    }
+  deleteRow(index){
+    const control = <FormArray>this.FormGroup.controls['itemRows'];
+    control.removeAt(index);
+    console.log(index);
   }
 }
